@@ -1,0 +1,55 @@
+# PowerShell Enumeration Commands
+
+---
+
+## 1. Process Enumeration
+
+List all running processes:
+Get-Process
+
+Show details for a specific process:
+Get-Process <Process name>
+
+Display all available fields for a process:
+Get-Process <Process name> | Select-Object -Property *
+
+Show selected fields (path, name, ID):
+Get-Process | Select-Object Path, Name, Id
+
+Filter by process name:
+Get-Process | Select-Object Path, Name, Id | Where-Object Name -eq <Process name>
+
+Find processes with paths containing a keyword (e.g., temp):
+Get-Process | Select-Object Path, Name, Id | Where-Object Path -Like "*temp*"
+
+---
+
+## 2. Network Enumeration
+
+List all TCP connections:
+Get-NetTCPConnection
+
+Show selected fields for each connection:
+Get-NetTCPConnection | Select-Object LocalAddress, LocalPort, State, OwningProcess
+
+---
+
+## 3. Registry Startup Keys
+
+List registry keys under the current user hive:
+Get-ChildItem HKCU:
+
+Show values inside a specific registry key:
+Get-ItemProperty <Registry path>
+
+Common auto-start registry locations:
+Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Run"
+Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce"
+Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\RunOnce"
+
+Remove a suspicious auto-start entry:
+Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "<ValueName>"
+
+Remove a suspicious file:
+Remove-Item $env:temp\<Process name>.exe

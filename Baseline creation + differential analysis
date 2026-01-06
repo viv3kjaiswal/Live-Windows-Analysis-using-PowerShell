@@ -1,0 +1,75 @@
+# **Baseline Creation and Differential Analysis**
+
+A baseline provides a known-good reference for detecting abnormal or malicious activity.
+
+---
+
+## **1. Baseline Creation**
+
+Below are the commands used to generate baseline data for services, scheduled tasks, and local users.
+
+### 1.1 Create baseline files
+
+1. Create a baseline of services:  
+   Get-Service | Select-Object -ExpandProperty Name | Out-File "baseline/services.txt"
+
+2. Create a baseline of scheduled tasks:  
+   Get-ScheduledTask | Select-Object -ExpandProperty TaskName | Out-File "baseline/scheduledtasks.txt"
+
+3. Create a baseline of local users:  
+   Get-LocalUser | Select-Object -ExpandProperty Name | Out-File "baseline/localusers.txt"
+
+4. Verify that the baseline files were created:  
+   Get-ChildItem baseline
+
+---
+
+## **Note**
+
+**These commands enumerate a list of services, scheduled tasks, and local users.**  
+**Select-Object with -ExpandProperty retrieves only the name field and removes the usual header output.**  
+**You can save these files to any folder — simply replace "baseline" with your desired destination path and filename in the Out-File command.**  
+**Example: Out-File "C:\IR\baseline\services.txt"**
+
+---
+
+## **2. Differential Analysis Overview**
+
+Differential analysis compares current system data to a known-good baseline.
+
+### 2.1 Useful comparison targets
+
+1. Services  
+2. Scheduled tasks  
+3. Local users  
+4. Registry auto-start entries  
+5. Running processes  
+6. Network connections  
+
+### 2.2 Workflow
+
+1. Create baseline  
+2. Capture current state  
+3. Compare  
+4. Investigate differences  
+
+---
+
+## **3. Example: Services Differential Analysis**
+
+### 3.1 Load current services
+
+1. Load the current list of services:  
+   $servicesnow = Get-Content .\services.txt
+
+### 3.2 Load baseline services
+
+2. Load the baseline list of services:  
+   $servicesbaseline = Get-Content baseline\services.txt
+
+### 3.3 Compare baseline vs current
+
+3. Compare the two datasets:  
+   Compare-Object $servicesbaseline $servicesnow
+
+This highlights additions, removals, or modifications between the two datasets.
