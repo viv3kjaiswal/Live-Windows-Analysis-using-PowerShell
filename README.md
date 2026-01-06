@@ -1,4 +1,9 @@
-<h1 style="font-size: 30px;"><b>🪟 Windows Enumeration & Baseline Project</b></h1>
+<h1 style="font-size: 30px;">
+  <img src="https://raw.githubusercontent.com/github/explore/main/topics/windows/windows.png"
+       width="30"
+       style="vertical-align: middle; margin-right: 8px;">
+  <b>Windows Enumeration & Baseline Project</b>
+</h1>
 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-blue)
@@ -14,8 +19,8 @@ The goal is to give analysts a lightweight, browser-friendly reference they can 
 
 All content is kept simple and flat:
 
-- <b>commands.md</b> — Enumeration commands for processes, network connections, and registry auto-start keys  
-- <b>baseline.md</b> — Baseline creation steps and differential analysis workflow  
+- <b>Enumeration commands</b> — Enumeration commands for processes, network connections, and registry auto-start keys  
+- <b>Baseline creation + differential analysis</b> — Baseline creation steps and differential analysis workflow  
 
 ---
 
